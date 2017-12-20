@@ -3,7 +3,7 @@ package com.fire.fire.postandcommenttutorial.models;
 import java.io.Serializable;
 
 /**
- * Created by brad on 2017/02/05.
+ * Model for user data to be parsed by JSON and sent to a database in Google Firebase
  */
 
 public class User implements Serializable {
@@ -11,17 +11,20 @@ public class User implements Serializable {
     private String email;
     private String photoUrl;
     private String uid;
+    private Boolean active;
 
     public User() {
     }
 
-    public User(String user, String email, String photoUrl, String uid) {
+    public User(String user, String email, String photoUrl, String uid, Boolean active) {
 
         this.user = user;
         this.email = email;
         this.photoUrl = photoUrl;
         this.uid = uid;
+        this.active = active;
     }
+
 
     public String getUser() {
 
@@ -55,4 +58,14 @@ public class User implements Serializable {
     public void setUid(String uid) {
         this.uid = uid;
     }
+
+    public Boolean getActive() {
+        return active;
+    }
+
+    public void setActive(Boolean active) {
+        this.active = active;
+    }
+
+
 }

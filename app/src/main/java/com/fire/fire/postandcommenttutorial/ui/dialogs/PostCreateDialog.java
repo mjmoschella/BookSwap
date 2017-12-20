@@ -2,6 +2,7 @@ package com.fire.fire.postandcommenttutorial.ui.dialogs;
 
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fire.fire.postandcommenttutorial.R;
 import com.fire.fire.postandcommenttutorial.models.Post;
@@ -25,10 +27,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.concurrent.TimeUnit;
+
 import static android.app.Activity.RESULT_OK;
 
 /**
- * Created by brad on 2017/02/05.
+ * This is the class that is used to create the posts from the info the user enters in.
  */
 
 public class PostCreateDialog extends DialogFragment implements View.OnClickListener {
@@ -66,6 +70,7 @@ public class PostCreateDialog extends DialogFragment implements View.OnClickList
         }
     }
 
+
     private void sendPost() {
         mProgressDialog.setMessage("Sending post...");
         mProgressDialog.setCancelable(false);
@@ -77,39 +82,70 @@ public class PostCreateDialog extends DialogFragment implements View.OnClickList
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         User user = dataSnapshot.getValue(User.class);
+
+                        if (user.getActive() == true) {
+
                         final String postId = FirebaseUtils.getUid();
                         TextView postDialogTextView = (TextView) mRootView.findViewById(R.id.post_dialog_edittext);
+                            TextView titleDialogTextView = (TextView) mRootView.findViewById(R.id.post_dialog_edittitle);
+                            TextView authorDialogTextView = (TextView) mRootView.findViewById(R.id.post_dialog_editauthor);
+                            TextView courseDialogTextView = (TextView) mRootView.findViewById(R.id.post_dialog_editcourse);
+                            TextView priceDialogTextView = (TextView) mRootView.findViewById(R.id.post_dialog_editprice);
+
                         String text = postDialogTextView.getText().toString();
+                            String text1 = titleDialogTextView.getText().toString();
+                            String text2 = authorDialogTextView.getText().toString();
+                            String text3 = courseDialogTextView.getText().toString();
+                            String text4 = priceDialogTextView.getText().toString();
 
-                        mPost.setUser(user);
-                        mPost.setNumComments(0);
-                        mPost.setNumLikes(0);
-                        mPost.setTimeCreated(System.currentTimeMillis());
-                        mPost.setPostId(postId);
-                        mPost.setPostText(text);
 
-                        if (mSelectedUri != null) {
-                            FirebaseUtils.getImageSRef()
-                                    .child(mSelectedUri.getLastPathSegment())
-                                    .putFile(mSelectedUri)
-                                    .addOnSuccessListener(getActivity(),
-                                            new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                                @Override
-                                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                                    String url = Constants.POST_IMAGES + "/" + mSelectedUri.getLastPathSegment();
-                                                    mPost.setPostImageUrl(url);
-                                                    addToMyPostList(postId);
-                                                }
-                                            });
+
+                            mPost.setUser(user);
+                            mPost.setNumComments(0);
+                            mPost.setNumLikes(0);
+                            mPost.setTimeCreated(System.currentTimeMillis());
+                            mPost.setPostId(postId);
+                            mPost.setPostText(text);
+                            mPost.setBookTitle(text1);
+                            mPost.setBookAuthor(text2);
+                            mPost.setBookCourse(text3);
+                            mPost.setBookPrice(text4);
+
+
+
+                            if (mSelectedUri != null) {
+                                FirebaseUtils.getImageSRef()
+                                        .child(mSelectedUri.getLastPathSegment())
+                                        .putFile(mSelectedUri)
+                                        .addOnSuccessListener(getActivity(),
+                                                new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                                    @Override
+                                                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                                        String url = Constants.POST_IMAGES + "/" + mSelectedUri.getLastPathSegment();
+                                                        mPost.setPostImageUrl(url);
+                                                        addToMyPostList(postId);
+                                                    }
+                                                });
+                            } else {
+                                addToMyPostList(postId);
+                            }
                         } else {
-                            addToMyPostList(postId);
+
+                            mProgressDialog.dismiss();
+
+                            Toast.makeText(getActivity(), "Your account has been suspended." +
+                                    "\nYou cannot use this feature.", Toast.LENGTH_LONG).show();
+
                         }
+
                     }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        mProgressDialog.dismiss();
-                    }
+
+                        @Override
+                        public void onCancelled (DatabaseError databaseError){
+                            mProgressDialog.dismiss();
+                        }
+
                 });
     }
 

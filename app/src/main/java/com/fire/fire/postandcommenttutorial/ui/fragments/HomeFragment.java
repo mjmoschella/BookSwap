@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.fire.fire.postandcommenttutorial.R;
 import com.fire.fire.postandcommenttutorial.models.Post;
+import com.fire.fire.postandcommenttutorial.ui.activities.MainActivity;
 import com.fire.fire.postandcommenttutorial.ui.activities.PostActivity;
 import com.fire.fire.postandcommenttutorial.ui.dialogs.PostCreateDialog;
 import com.fire.fire.postandcommenttutorial.utils.Constants;
@@ -32,25 +33,24 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class HomeFragment extends Fragment {
-    private View mRootVIew;
+    private View mRootView;
     private FirebaseRecyclerAdapter<Post, PostHolder> mPostAdapter;
     private RecyclerView mPostRecyclerView;
+    private LinearLayoutManager mLayoutManager;
 
     public HomeFragment() {
-        // Required empty public constructor
+
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        mRootVIew = inflater.inflate(R.layout.fragment_home, container, false);
-        FloatingActionButton fab = (FloatingActionButton) mRootVIew.findViewById(R.id.fab);
+
+        mRootView = inflater.inflate(R.layout.fragment_home, container, false);
+        FloatingActionButton fab = (FloatingActionButton) mRootView.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,13 +59,18 @@ public class HomeFragment extends Fragment {
             }
         });
         init();
-        return mRootVIew;
+        return mRootView;
     }
 
     private void init() {
-        mPostRecyclerView = (RecyclerView) mRootVIew.findViewById(R.id.recyclerview_post);
+        mPostRecyclerView = (RecyclerView) mRootView.findViewById(R.id.recyclerview_post);
         mPostRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         setupAdapter();
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mLayoutManager.setReverseLayout(true);
+        mLayoutManager.setStackFromEnd(true);
+
+        mPostRecyclerView.setLayoutManager(mLayoutManager);
         mPostRecyclerView.setAdapter(mPostAdapter);
     }
 
@@ -83,6 +88,11 @@ public class HomeFragment extends Fragment {
                 viewHolder.setTIme(DateUtils.getRelativeTimeSpanString(model.getTimeCreated()));
                 viewHolder.setUsername(model.getUser().getUser());
                 viewHolder.setPostText(model.getPostText());
+                viewHolder.setTitleText(model.getBookTitle());
+                viewHolder.setAuthorText(model.getBookAuthor());
+                viewHolder.setCourseText(model.getBookCourse());
+                viewHolder.setPriceText(model.getBookPrice());
+
 
                 Glide.with(getActivity())
                         .load(model.getUser().getPhotoUrl())
@@ -119,8 +129,7 @@ public class HomeFragment extends Fragment {
         };
     }
 
-    //During the tutorial I think I messed up this code. Make sure your's aligns to this, or just
-    //check out the github code
+
     private void onLikeClick(final String postId) {
         FirebaseUtils.getPostLikedRef(postId)
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -183,6 +192,10 @@ public class HomeFragment extends Fragment {
         LinearLayout postCommentLayout;
         TextView postNumLikesTextView;
         TextView postNumCommentsTextView;
+        TextView postTitleTextView;
+        TextView postAuthorTextView;
+        TextView postCourseTextView;
+        TextView postPriceTextView;
 
 
         public PostHolder(View itemView) {
@@ -196,6 +209,10 @@ public class HomeFragment extends Fragment {
             postNumLikesTextView = (TextView) itemView.findViewById(R.id.tv_likes);
             postNumCommentsTextView = (TextView) itemView.findViewById(R.id.tv_comments);
             postTextTextView = (TextView) itemView.findViewById(R.id.tv_post_text);
+            postTitleTextView = (TextView) itemView.findViewById(R.id.tv_title_text);
+            postAuthorTextView = (TextView) itemView.findViewById(R.id.tv_author_text);
+            postCourseTextView = (TextView) itemView.findViewById(R.id.tv_course_text);
+            postPriceTextView = (TextView) itemView.findViewById(R.id.tv_price_text);
         }
 
         public void setUsername(String username) {
@@ -216,6 +233,22 @@ public class HomeFragment extends Fragment {
 
         public void setPostText(String text) {
             postTextTextView.setText(text);
+        }
+
+        public void setTitleText(String text) {
+            postTitleTextView.setText(text);
+        }
+
+        public void setAuthorText(String text) {
+            postAuthorTextView.setText(text);
+        }
+
+        public void setCourseText(String text) {
+            postCourseTextView.setText(text);
+        }
+
+        public void setPriceText(String text) {
+            postPriceTextView.setText(text);
         }
 
     }

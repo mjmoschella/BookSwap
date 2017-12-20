@@ -16,11 +16,43 @@
             android:maxHeight="300dp"
             android:src="@drawable/image_placeholder" />
 
+        <EditText
+            android:id="@+id/post_dialog_edittitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Enter Book Title"
+            android:maxLines="1" />
+
+        <EditText
+            android:id="@+id/post_dialog_editauthor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Enter Author"
+            android:maxLines="1" />
+
+        <EditText
+            android:id="@+id/post_dialog_editcourse"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Course Title"
+            android:maxLines="1" />
+
+        <EditText
+            android:id="@+id/post_dialog_editprice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Price"
+            android:maxLines="1" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:orientation="horizontal">
+
+            //Dont delete this
 
             <ImageView
                 android:id="@+id/post_dialog_select_imageview"
@@ -36,7 +68,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="Type your post"
+                android:hint="Additional Info"
                 android:maxLines="5" />
 
             <ImageView
@@ -48,5 +80,6 @@
                 android:layout_marginRight="16dp"
                 android:src="@drawable/ic_send_black_24dp" />
         </LinearLayout>
+
     </LinearLayout>
 </android.support.v7.widget.CardView>

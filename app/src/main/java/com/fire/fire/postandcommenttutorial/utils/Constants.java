@@ -19,4 +19,5 @@ public class Constants {
     public static final String USER_RECORD = "user_record";
     public static final String USERS_KEY = "users";
     public static final String NUM_COMMENTS_KEY = "numComments";
+    public static final String ACTIVE_KEY = "active";
 }

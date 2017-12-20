@@ -3,7 +3,7 @@ package com.fire.fire.postandcommenttutorial.models;
 import java.io.Serializable;
 
 /**
- * Created by brad on 2017/02/05.
+ * Model for comment data to be parsed by JSON and sent to a database in Google Firebase
  */
 
 public class Comment implements Serializable {

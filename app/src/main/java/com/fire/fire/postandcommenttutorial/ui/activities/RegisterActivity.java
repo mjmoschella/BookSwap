@@ -21,6 +21,8 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 
+//This is the activity for the user sign in page.
+
 public class RegisterActivity extends BaseActivity implements View.OnClickListener {
 
     private static final int RC_SIGN_IN = 9001;
@@ -76,6 +78,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                             //Let's create the models quick(I know! it's weird time in this tutorial
                             //To be building it
                             User user = new User();
+                            user.setActive(true);
                             String photoUrl = null;
                             if (account.getPhotoUrl() != null) {
                                 user.setPhotoUrl(account.getPhotoUrl().toString());
@@ -84,6 +87,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                             user.setEmail(account.getEmail());
                             user.setUser(account.getDisplayName());
                             user.setUid(mAuth.getCurrentUser().getUid());
+                           // user.setActive("true");
 
                             FirebaseUtils.getUserRef(account.getEmail().replace(".", ","))
                                     .setValue(user, new DatabaseReference.CompletionListener() {

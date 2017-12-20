@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.fire.fire.postandcommenttutorial.R;
@@ -29,6 +30,8 @@ import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+//this is the activity for an individual post with comments.
 
 public class PostActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -72,7 +75,7 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
 
                 Glide.with(PostActivity.this)
                         .load(model.getUser().getPhotoUrl())
-                        .into(viewHolder.commentOwnerDisplay);
+                       .into(viewHolder.commentOwnerDisplay);
             }
         };
 
@@ -89,10 +92,19 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
         TextView postNumLikesTextView = (TextView) findViewById(R.id.tv_likes);
         TextView postNumCommentsTextView = (TextView) findViewById(R.id.tv_comments);
         TextView postTextTextView = (TextView) findViewById(R.id.tv_post_text);
+        TextView postTitleTextView = (TextView) findViewById(R.id.tv_title_text);
+        TextView postAuthorTextView = (TextView) findViewById(R.id.tv_author_text);
+        TextView postCourseTextView = (TextView) findViewById(R.id.tv_course_text);
+        TextView postPriceTextView = (TextView) findViewById(R.id.tv_price_text);
 
         postOwnerUsernameTextView.setText(mPost.getUser().getUser());
         postTimeCreatedTextView.setText(DateUtils.getRelativeTimeSpanString(mPost.getTimeCreated()));
         postTextTextView.setText(mPost.getPostText());
+        postTitleTextView.setText(mPost.getBookTitle());
+        postAuthorTextView.setText(mPost.getBookAuthor());
+        postCourseTextView.setText(mPost.getBookCourse());
+        postPriceTextView.setText(mPost.getBookPrice());
+
         postNumLikesTextView.setText(String.valueOf(mPost.getNumLikes()));
         postNumCommentsTextView.setText(String.valueOf(mPost.getNumComments()));
 
@@ -137,6 +149,7 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
         final String uid = FirebaseUtils.getUid();
         String strComment = mCommentEditTextView.getText().toString();
 
+
         mComment.setCommentId(uid);
         mComment.setComment(strComment);
         mComment.setTimeCreated(System.currentTimeMillis());
@@ -145,6 +158,9 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         User user = dataSnapshot.getValue(User.class);
+
+                        if (user.getActive() == true){
+                            mComment.setUser(user);
                         FirebaseUtils.getCommentRef(mPost.getPostId())
                                 .child(uid)
                                 .setValue(mComment);
@@ -165,6 +181,13 @@ public class PostActivity extends AppCompatActivity implements View.OnClickListe
                                         FirebaseUtils.addToMyRecord(Constants.COMMENTS_KEY, uid);
                                     }
                                 });
+                        } else {
+                            progressDialog.dismiss();
+
+                           Toast.makeText(PostActivity.this, "Your account has been suspended." +
+                                   "\nYou cannot use this feature.", Toast.LENGTH_LONG).show();
+
+                        }
                     }
 
                     @Override

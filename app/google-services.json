@@ -1,27 +1,35 @@
 {
   "project_info": {
-    "project_number": "635216470603",
-    "firebase_url": "https://fir-comment-and-post-tut.firebaseio.com",
-    "project_id": "fir-comment-and-post-tut",
-    "storage_bucket": "fir-comment-and-post-tut.appspot.com"
+    "project_number": "930674581822",
+    "firebase_url": "https://bookswap-df869.firebaseio.com",
+    "project_id": "bookswap-df869",
+    "storage_bucket": "bookswap-df869.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:635216470603:android:44b3b2e5a94eeda4",
+        "mobilesdk_app_id": "1:930674581822:android:0e07a652e02e78ec",
         "android_client_info": {
-          "package_name": "com.fire.fire.postandcommenttutorial"
+          "package_name": "com.fire.fire.bookswap"
         }
       },
       "oauth_client": [
         {
-          "client_id": "635216470603-t4jl5ogm22rcsgfpujo3oism3dt8feer.apps.googleusercontent.com",
+          "client_id": "930674581822-4jsg4020gk2vd7han60hssu0duelom61.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fire.fire.bookswap",
+            "certificate_hash": "1c807ee791bfc1bcc6d0756a10d44190628e9752"
+          }
+        },
+        {
+          "client_id": "930674581822-m6ef2m4h34k1ed0igr4tp926jgch7ajj.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyASKw4OYx0P7NyP7KFQr7eiS_XPVSy1oFA"
+          "current_key": "AIzaSyDbSGRMDvrFtSg6TIXqge8y6d2tzYl-vw0"
         }
       ],
       "services": {
@@ -32,7 +40,59 @@
           "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "635216470603-t4jl5ogm22rcsgfpujo3oism3dt8feer.apps.googleusercontent.com",
+              "client_id": "930674581822-m6ef2m4h34k1ed0igr4tp926jgch7ajj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:930674581822:android:44b3b2e5a94eeda4",
+        "android_client_info": {
+          "package_name": "com.fire.fire.postandcommenttutorial"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "930674581822-4j66h4b111effvcktart4rn13m4j096e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fire.fire.postandcommenttutorial",
+            "certificate_hash": "398e337d7e66d40279c92951d659043d5969d3b0"
+          }
+        },
+        {
+          "client_id": "930674581822-lhrcd8cikiboslfgil5pgkjcaqmtoekl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.fire.fire.postandcommenttutorial",
+            "certificate_hash": "1c807ee791bfc1bcc6d0756a10d44190628e9752"
+          }
+        },
+        {
+          "client_id": "930674581822-m6ef2m4h34k1ed0igr4tp926jgch7ajj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbSGRMDvrFtSg6TIXqge8y6d2tzYl-vw0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "930674581822-m6ef2m4h34k1ed0igr4tp926jgch7ajj.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

@@ -42,6 +42,43 @@
     </LinearLayout>
 
     <TextView
+        android:id="@+id/tv_title_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:text="Title text has some words that I could use for a place holder like this" />
+
+    <TextView
+        android:id="@+id/tv_author_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:text="Author text has some words that I could use for a place holder like this" />
+
+    <TextView
+        android:id="@+id/tv_course_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:text="Course text has some words that I could use for a place holder like this" />
+
+    <TextView
+        android:id="@+id/tv_price_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:text="Price text has some words that I could use for a place holder like this" />
+
+
+    <TextView
         android:id="@+id/tv_post_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -49,6 +86,8 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:text="Post text has some words that I could use for a place holder like this" />
+
+
 
     <ImageView
         android:id="@+id/iv_post_display"
@@ -72,12 +111,14 @@
             android:padding="16dp">
 
             <ImageView
+                android:visibility="gone"
                 android:id="@+id/iv_like"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_thumb_up_black_24dp" />
 
             <TextView
+                android:visibility="gone"
                 android:id="@+id/tv_likes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

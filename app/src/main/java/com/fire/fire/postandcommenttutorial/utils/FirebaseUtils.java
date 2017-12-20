@@ -47,10 +47,12 @@ public class FirebaseUtils {
         return FirebaseAuth.getInstance().getCurrentUser();
     }
 
+
     public static String getUid(){
         String path = FirebaseDatabase.getInstance().getReference().push().toString();
         return path.substring(path.lastIndexOf("/") + 1);
     }
+
 
     public static StorageReference getImageSRef(){
         return FirebaseStorage.getInstance().getReference(Constants.POST_IMAGES);
@@ -60,6 +62,8 @@ public class FirebaseUtils {
         return FirebaseDatabase.getInstance().getReference(Constants.MY_POSTS)
                 .child(getCurrentUser().getEmail().replace(".",","));
     }
+
+
 
     public static DatabaseReference getCommentRef(String postId){
         return FirebaseDatabase.getInstance().getReference(Constants.COMMENTS_KEY)
